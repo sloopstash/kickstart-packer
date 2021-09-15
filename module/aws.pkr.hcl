@@ -40,7 +40,7 @@ variable "ssh_private_key_path" {
   description = "SSH private key path."
 }
 
-source "amazon-ebs" "ec2_base_inst" {
+source "amazon-ebs" "ec2_base_v1_inst" {
   ami_name = "sloopstash-amazonlinux-v1-ami"
   region = var.region
   vpc_id = var.vpc_net_id
@@ -82,14 +82,15 @@ source "amazon-ebs" "ec2_base_inst" {
   tags = {
     Name = "base-v1-ami"
     Region = var.region
+    Product = "crm"
   }
 }
 
 build {
-  name = "ec2_base_img"
-  sources = ["source.amazon-ebs.ec2_base_inst"]
+  name = "ec2_base_v1_img"
+  sources = ["source.amazon-ebs.ec2_base_v1_inst"]
   provisioner "shell" {
-    only = ["amazon-ebs.ec2_base_inst"]
+    only = ["amazon-ebs.ec2_base_v1_inst"]
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo yum update -y",
