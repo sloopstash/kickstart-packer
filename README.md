@@ -1,2 +1,2 @@
 # Kickstart Packer
-The ultimate aim of this Packer starter-kit is to help you automate OS image building on AWS, GCP, and Azure cloud using Packer modules for running a sample CRM app service and Redis database service.
+Our Packer starter-kit repository contains Packer modules, configurations, and other resources required to automate the OS image build of Amazon EC2 AMI, Azure image, and Google CE image.
