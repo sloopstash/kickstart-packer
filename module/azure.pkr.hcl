@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     azure = {
-      version = "~> 2"
+      version = "2.0.2"
       source = "github.com/hashicorp/azure"
     }
   }
@@ -37,7 +37,7 @@ source "azure-arm" "vm_base_v1_sr" {
   image_sku = "9-gen2"
   vm_size = "Standard_B1s"
   os_type = "Linux"
-  use_azure_cli_auth = false
+  use_azure_cli_auth = true
   communicator = "ssh"
   ssh_port = 22
   ssh_username = "azureuser"
