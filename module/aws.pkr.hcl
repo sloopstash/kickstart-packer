@@ -98,8 +98,6 @@ build {
       "sudo yum install -y python-devel python-pip python-setuptools",
       "sudo python -m pip install supervisor",
       "sudo mkdir /etc/supervisord.d",
-      "sudo ln -s /usr/local/bin/supervisorctl /usr/bin/supervisorctl",
-      "sudo ln -s /usr/local/bin/supervisord /usr/bin/supervisord",
       "history -c"
     ]
   }
