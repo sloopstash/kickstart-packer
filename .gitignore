@@ -1,5 +1,2 @@
-secret/*.pem
-secret/*.pub
-secret/node*
 *.log
 tmp/*

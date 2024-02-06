@@ -24,7 +24,7 @@ variable "ssh_private_key_path" {
   description = "SSH private key path."
 }
 
-source "azure-arm" "vm_base_v1_sr" {
+source "azure-arm" "base_v1_vm" {
   managed_image_name = "sloopstash-base-v1.1.1-image"
   location = "Central India"
   managed_image_resource_group_name = var.rg_name
@@ -45,18 +45,16 @@ source "azure-arm" "vm_base_v1_sr" {
   ssh_timeout = "1m"
   azure_tags = {
     Name = "sloopstash-base-v1.1.1-image"
-    Environment = "stg"
-    Stack = "crm"
     Region = "centralindia"
-    Organization = "sloopstash" 
+    Organization = "sloopstash"
   }
 }
 
 build {
-  name = "vm_base_v1_img"
-  sources = ["source.azure-arm.vm_base_v1_sr"]
+  name = "base_v1_image"
+  sources = ["source.azure-arm.base_v1_vm"]
   provisioner "shell" {
-    only = ["azure-arm.vm_base_v1_sr"]
+    only = ["azure-arm.base_v1_vm"]
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo yum update -y",

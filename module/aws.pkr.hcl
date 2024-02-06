@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     amazon = {
-      version = "1.0.0"
+      version = "1.3.0"
       source = "github.com/hashicorp/amazon"
     }
   }
@@ -41,13 +41,13 @@ variable "ssh_private_key_path" {
 }
 
 source "amazon-ebs" "ec2_base_v1_inst" {
-  ami_name = "sloopstash-amazonlinux-v1-ami"
+  ami_name = "sloopstash-base-v1.1.1-ami"
   region = var.region
   vpc_id = var.vpc_net_id
   subnet_id = var.vpc_sn_id
   security_group_id = var.vpc_sg_id
   source_ami = var.ec2_source_ami_id
-  instance_type = "t3a.nano"
+  instance_type = "t3a.micro"
   associate_public_ip_address = true
   ami_virtualization_type = "hvm"
   force_deregister = true
@@ -80,25 +80,26 @@ source "amazon-ebs" "ec2_base_v1_inst" {
   ssh_private_key_file = var.ssh_private_key_path
   ssh_timeout = "1m"
   tags = {
-    Name = "base-v1-ami"
+    Name = "sloopstash-base-v1.1.1-ami"
     Region = var.region
-    Product = "crm"
+    Organization = "sloopstash"
   }
 }
 
 build {
-  name = "ec2_base_v1_img"
+  name = "ec2_base_v1_ami"
   sources = ["source.amazon-ebs.ec2_base_v1_inst"]
   provisioner "shell" {
     only = ["amazon-ebs.ec2_base_v1_inst"]
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo yum update -y",
-      "sudo yum install -y wget vim initscripts gcc make tar unzip net-tools bind-utils nc nmap",
+      "sudo yum install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap",
       "sudo yum install -y python-devel python-pip python-setuptools",
-      "sudo yum install -y openssh-server openssh-clients passwd git",
-      "sudo easy_install supervisor",
+      "sudo python -m pip install supervisor",
       "sudo mkdir /etc/supervisord.d",
+      "sudo ln -s /usr/local/bin/supervisorctl /usr/bin/supervisorctl",
+      "sudo ln -s /usr/local/bin/supervisord /usr/bin/supervisord",
       "history -c"
     ]
   }
