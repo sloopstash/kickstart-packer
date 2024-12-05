@@ -1,0 +1,32 @@
+# General variables
+os_name = "almalinux"
+os_version = 9.4
+os_arch = "x86_64"
+sources_enabled = ["source.virtualbox-iso.vm"]
+vbox_boot_wait ="5s"
+vbox_gfx_controller = "vboxvga"
+vbox_gfx_vram_size = 33
+vbox_guest_additions_interface = "sata"
+vbox_guest_additions_mode = "upload"
+vbox_guest_additions_path = "VBoxGuestAdditions_{{ .Version }}.iso"
+vbox_guest_os_type = "RedHat_64"
+vbox_hard_drive_interface = "sata"
+vbox_iso_interface = "sata"
+vboxmanage = [["modifyvm", "{{.Name}}", "--audio", "none"]]
+virtualbox_version_file = ".vbox_version"
+communicator ="ssh"
+memory = 2048
+output_directory = "new"
+vm_name = "almalinux-9.4-amd64"
+shutdown_command = "sudo -S /sbin/halt -h -p"
+boot_command = ["<wait><wait><up><wait><tab> inst.text inst.ks=https://gist.githubusercontent.com/DivyaPriya-Muthuvel/a69f60e8c114853d48ad5b6f92e10944/raw/198bcae12a2290aa93b4764aeae5977169decc20/9ks.cfg<enter><wait>"]
+ssh_username = "tuto"
+ssh_password = "vagrant"
+cpus = 2
+disk_size= 65536
+headless = true
+shutdown_timeout = "15m"
+ssh_timeout = "15m"
+ssh_port = 22
+iso_url = "/home/divya/Downloads/AlmaLinux-9.4-x86_64-minimal.iso"
+iso_checksum = "20123bb9f8319143e792b906137236bdcb0d10b023c36626ca2d8e9f62144eb9"

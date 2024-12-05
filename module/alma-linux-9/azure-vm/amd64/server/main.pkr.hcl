@@ -58,7 +58,7 @@ build {
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo yum update -y",
-      "sudo yum install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap",
+      "sudo yum install -y wget vim nano net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap",
       "sudo yum install -y python-devel python-pip python-setuptools",
       "sudo python -m pip install supervisor",
       "sudo mkdir /etc/supervisord.d",
