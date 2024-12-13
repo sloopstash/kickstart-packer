@@ -135,7 +135,7 @@ variable "headless" {
 }
 variable "iso_url" {
   type        = string
-  default     = "/home/divya/Downloads/AlmaLinux-9.4-x86_64-minimal.iso"
+  default     = "https://repo.almalinux.org/almalinux/9/isos/x86_64/AlmaLinux-9.4-x86_64-dvd.iso"
   description = "ISO path"
 }
 variable "shutdown_timeout" {
@@ -152,7 +152,7 @@ variable "ssh_port" {
 }
 variable "iso_checksum" {
   type        = string
-  default     = "20123bb9f8319143e792b906137236bdcb0d10b023c36626ca2d8e9f62144eb9"
+  default     = "file:https://repo.almalinux.org/almalinux/9/isos/x86_64/CHECKSUM"
   description = "ISO download checksum"
 }
 
