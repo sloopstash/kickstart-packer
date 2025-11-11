@@ -28,5 +28,5 @@ headless = true
 shutdown_timeout = "15m"
 ssh_timeout = "15m"
 ssh_port = 22
-iso_url = "/home/divya/Downloads/AlmaLinux-9.4-x86_64-minimal.iso"
-iso_checksum = "20123bb9f8319143e792b906137236bdcb0d10b023c36626ca2d8e9f62144eb9"
+iso_url = "https://repo.almalinux.org/almalinux/9/isos/x86_64/AlmaLinux-9.4-x86_64-dvd.iso"
+iso_checksum = "file:https://repo.almalinux.org/almalinux/9/isos/x86_64/CHECKSUM"

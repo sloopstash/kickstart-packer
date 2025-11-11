@@ -1,9 +1,8 @@
-# Kickstart Packer
-Build secure, scalable, lightweight, and hardened OS/machine images for cloud and on-premise hypervisors using Packer.
+# SloopStash Packer starter-kit
 
 
 ## Getting started
-Please refer to the [wiki](https://github.com/sloopstash/kickstart-packer/wiki) for detailed instructions on how to get started with our Packer starter-kit.
+Please refer to the [documentation](https://sloopstash.com/documentation/toolkit/vm/packer/index.html) for detailed instructions on how to get started with SloopStash Packer starter-kit.
 
 
 ## Get support

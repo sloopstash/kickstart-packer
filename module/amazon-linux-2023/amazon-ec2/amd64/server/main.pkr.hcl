@@ -40,8 +40,8 @@ variable "ssh_private_key_path" {
   description = "SSH private key path."
 }
 
-source "amazon-ebs" "ec2_amazon_linux_2_inst" {
-  ami_name = "sloopstash-amazon-linux-2-v1.1.1-ami"
+source "amazon-ebs" "ec2_amazon_linux_2023_inst" {
+  ami_name = "sloopstash-amazon-linux-2023-v1.1.1-ami"
   region = var.region
   vpc_id = var.vpc_net_id
   subnet_id = var.vpc_sn_id
@@ -80,17 +80,17 @@ source "amazon-ebs" "ec2_amazon_linux_2_inst" {
   ssh_private_key_file = var.ssh_private_key_path
   ssh_timeout = "1m"
   tags = {
-    Name = "sloopstash-amazon-linux-2-v1.1.1-ami"
+    Name = "sloopstash-amazon-linux-2023-v1.1.1-ami"
     Region = var.region
     Organization = "sloopstash"
   }
 }
 
 build {
-  name = "ec2_amazon_linux_2_ami"
-  sources = ["source.amazon-ebs.ec2_amazon_linux_2_inst"]
+  name = "ec2_amazon_linux_2023_ami"
+  sources = ["source.amazon-ebs.ec2_amazon_linux_2023_inst"]
   provisioner "shell" {
-    only = ["amazon-ebs.ec2_amazon_linux_2_inst"]
+    only = ["amazon-ebs.ec2_amazon_linux_2023_inst"]
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo yum update -y",

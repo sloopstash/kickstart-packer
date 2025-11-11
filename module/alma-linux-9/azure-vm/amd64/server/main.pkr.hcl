@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     azure = {
-      version = "2.0.2"
+      version = "2.5.0"
       source = "github.com/hashicorp/azure"
     }
   }
@@ -24,8 +24,8 @@ variable "ssh_private_key_path" {
   description = "SSH private key path."
 }
 
-source "azure-arm" "base_v1_vm" {
-  managed_image_name = "sloopstash-base-v1.1.1-image"
+source "azure-arm" "alma_linux_9_vm" {
+  managed_image_name = "sloopstash-alma-linux-9-v1.1.1-img"
   location = "Central India"
   managed_image_resource_group_name = var.rg_name
   virtual_network_name = var.vnet_name
@@ -44,26 +44,25 @@ source "azure-arm" "base_v1_vm" {
   ssh_private_key_file = var.ssh_private_key_path
   ssh_timeout = "1m"
   azure_tags = {
-    Name = "sloopstash-base-v1.1.1-image"
+    Name = "sloopstash-alma-linux-9-v1.1.1-img"
     Region = "centralindia"
     Organization = "sloopstash"
   }
 }
 
 build {
-  name = "base_v1_image"
-  sources = ["source.azure-arm.base_v1_vm"]
+  name = "alma_linux_9_image"
+  sources = ["source.azure-arm.alma_linux_9_vm"]
   provisioner "shell" {
-    only = ["azure-arm.base_v1_vm"]
+    only = ["azure-arm.alma_linux_9_vm"]
     inline_shebang = "/bin/bash -e"
     inline = [
-      "sudo yum update -y",
-      "sudo yum install -y wget vim nano net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap",
-      "sudo yum install -y python-devel python-pip python-setuptools",
-      "sudo python -m pip install supervisor",
-      "sudo mkdir /etc/supervisord.d",
-      "sudo ln -s /usr/local/bin/supervisorctl /usr/bin/supervisorctl",
-      "sudo ln -s /usr/local/bin/supervisord /usr/bin/supervisord",
+      "sudo dnf update -y",
+      "sudo dnf install -y epel-release",
+      "sudo dnf install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap logrotate crontabs",
+      "sudo dnf install -y supervisor",
+      "sudo dnf clean all",
+      "sudo rm -rf /var/cache/dnf",
       "history -c"
     ]
   }
