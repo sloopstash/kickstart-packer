@@ -1,8 +1,0 @@
-region=""
-vpc_net_id=""
-vpc_sn_id=""
-vpc_sg_id=""
-ec2_source_ami_id=""
-ec2_key_pair_name=""
-kms_key_id="alias/aws/ebs"
-ssh_private_key_path=""

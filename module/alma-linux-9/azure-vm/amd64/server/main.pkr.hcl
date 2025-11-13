@@ -7,6 +7,10 @@ packer {
   }
 }
 
+variable "region" {
+  type = string
+  description = "Region."
+}
 variable "rg_name" {
   type = string
   description = "Resource group name."
@@ -26,7 +30,7 @@ variable "ssh_private_key_path" {
 
 source "azure-arm" "alma_linux_9_vm" {
   managed_image_name = "sloopstash-alma-linux-9-v1.1.1-img"
-  location = "Central India"
+  location = var.region
   managed_image_resource_group_name = var.rg_name
   virtual_network_name = var.vnet_name
   virtual_network_subnet_name = var.vnet_sn_name
@@ -45,7 +49,7 @@ source "azure-arm" "alma_linux_9_vm" {
   ssh_timeout = "1m"
   azure_tags = {
     Name = "sloopstash-alma-linux-9-v1.1.1-img"
-    Region = "centralindia"
+    Region = var.region
     Organization = "sloopstash"
   }
 }
@@ -58,11 +62,12 @@ build {
     inline_shebang = "/bin/bash -e"
     inline = [
       "sudo dnf update -y",
-      "sudo dnf install -y epel-release",
       "sudo dnf install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap logrotate crontabs",
-      "sudo dnf install -y supervisor",
+      "sudo dnf install -y python-devel python-pip python-setuptools",
       "sudo dnf clean all",
       "sudo rm -rf /var/cache/dnf",
+      "sudo python3 -m pip install supervisor",
+      "sudo mkdir /etc/supervisord.d",
       "history -c"
     ]
   }

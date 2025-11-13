@@ -1,7 +1,7 @@
 packer {
   required_plugins {
     amazon = {
-      version = "1.5.0"
+      version = "1.7.0"
       source = "github.com/hashicorp/amazon"
     }
   }
@@ -93,12 +93,12 @@ build {
     only = ["amazon-ebs.ec2_amazon_linux_2023_inst"]
     inline_shebang = "/bin/bash -e"
     inline = [
-      "sudo yum update -y",
-      "sudo yum install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap logrotate crontabs",
-      "sudo yum install -y python-devel python-pip python-setuptools",
-      "sudo yum clean all",
-      "sudo rm -rf /var/cache/yum",
-      "sudo python -m pip install supervisor",
+      "sudo dnf update -y",
+      "sudo dnf install -y wget vim net-tools gcc make tar git unzip sysstat tree initscripts bind-utils nc nmap logrotate crontabs",
+      "sudo dnf install -y python-devel python-pip python-setuptools",
+      "sudo dnf clean all",
+      "sudo rm -rf /var/cache/dnf",
+      "sudo python3 -m pip install supervisor",
       "sudo mkdir /etc/supervisord.d",
       "history -c"
     ]
