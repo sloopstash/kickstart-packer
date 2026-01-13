@@ -47,7 +47,7 @@ source "amazon-ebs" "ec2_amazon_linux_2023_inst" {
   subnet_id = var.vpc_sn_id
   security_group_id = var.vpc_sg_id
   source_ami = var.ec2_source_ami_id
-  instance_type = "t3a.micro"
+  instance_type = "t3.micro"
   associate_public_ip_address = true
   ami_virtualization_type = "hvm"
   force_deregister = true
